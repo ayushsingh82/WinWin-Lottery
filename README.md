@@ -1,143 +1,92 @@
-# Protokit starter-kit
+# WinWin-Lottery
 
-This repository is a monorepo aimed at kickstarting application chain development using the Protokit framework.
+## Overview
 
-## Quick start
+**WinWin-Lottery** is a no-loss lottery platform where users stake their tokens to earn yield over time. The yield generated from staked tokens is pooled and distributed as rewards without the risk of losing the initial deposit. Participants can win rewards in daily, weekly, and monthly lotteries, creating a sustainable and user-friendly way to earn while maintaining full control over their deposits.
 
-The monorepo contains 1 package and 1 app:
+## Key Features
 
-- `packages/chain` contains everything related to your app-chain
-- `apps/web` contains a demo UI that connects to your locally hosted app-chain sequencer
+- **Zero-Loss Participation**: Stake tokens, earn yield, and participate in the lottery with no risk of losing the initial deposit.
+- **Rewards Distribution**: The yield generated from staking is pooled and distributed as lottery rewards (daily, weekly, and monthly).
+- **Sustainable Model**: Users only win or withdraw their full deposit, while the generated yield is pooled for lottery rewards.
+- **Multiple Reward Tiers**:
+  - **Daily Rewards**: Small, frequent rewards to keep users engaged.
+  - **Weekly Rewards**: Larger rewards for mid-term stakers.
+  - **Monthly Rewards**: The largest rewards for long-term participants.
+- **No-Loss Withdrawal**: Users can withdraw their initial deposit at any time, and their share of the yield contributes to the reward pools.
+- **Yield Generation**: Assets are staked in secure DeFi platforms (e.g., Aave, Compound) for consistent yield generation.
+- **Protocol Fees**: A small percentage of the yield is allocated to the protocol to ensure sustainability.
+- **User-Friendly Interface**: Simplified DeFi interaction, making it easy for users to stake tokens and start earning rewards.
+- **Scalability**: Supports multiple tokens and integrates with additional DeFi yield protocols over time.
 
-**Prerequisites:**
+## How It Works
 
-- Node.js `v18` (we recommend using NVM)
-- pnpm `v9.8`
-- nvm
+1. **Staking**:  
+   Users deposit ERC-20 tokens into the protocol, which are locked for a specific period (daily, weekly, or monthly), depending on the selected reward tier.
 
-For running with persistance / deploying on a server
-- docker `>= 24.0`
-- docker-compose `>= 2.22.0`
+2. **Yield Generation**:  
+   The protocol stakes the assets in yield-generating DeFi platforms like Aave or Compound, earning interest over time.
 
-## Setup
+3. **Lottery Pools**:  
+   The interest generated from staked assets is pooled into reward categories (daily, weekly, and monthly).
 
-```zsh
-git clone https://github.com/proto-kit/starter-kit my-chain
-cd my-chain
+4. **No-Loss Withdrawal**:  
+   Users can withdraw their initial deposit at any time. However, their share of the yield will contribute to the prize pools.
 
-# ensures you have the right node.js version
-nvm use
-pnpm install
-```
+5. **Protocol Fees**:  
+   A small portion of the yield is taken as a protocol fee to ensure operational sustainability.
 
-## Running
+## Economic Model
 
-### Environments
+1. **Revenue Generation**:  
+   - **Protocol Fee**: A small percentage of the generated yield is taken as a fee. This fee does not affect the user's initial deposit, only the yield.
+   
+2. **Staking Incentives**:  
+   Protocol tokens may be introduced in the future to incentivize longer staking durations, encouraging users to stake for extended periods and earn additional rewards.
 
-The starter-kit offers different environments to run you appchain.
-You can use those environments to configure the mode of operation for your appchain depending on which stage of development you are in.
+3. **Partnerships & Collaborations**:  
+   Future partnerships with DeFi protocols and projects can enhance yield generation and reward distribution.
 
-The starter kit comes with a set of pre-configured environments:
-- `inmemory`: Runs everything in-memory without persisting the data. Useful for early stages of runtime development.
-- `development`: Runs the sequencer locally and persists all state in databases running in docker. 
-- `sovereign`: Runs your appchain fully in docker (except the UI) for testnet deployments without settlement.
+4. **Premium Memberships (Future Scope)**:  
+   Offering premium features or memberships that allow users to access increased rewards, exclusive prize pools, and faster withdrawals.
 
-Every command you execute should follow this pattern:
+## Benefits
 
-`pnpm env:<environment> <command>`
+- **No-Loss Mechanism**: Users can only win or withdraw their full deposit, ensuring no financial loss.
+- **Multiple Reward Tiers**: Daily, weekly, and monthly rewards offer flexible participation options.
+- **Yield Generation**: Consistent returns through secure DeFi protocols like Aave and Compound.
+- **Simple Interface**: A user-friendly platform that does not require in-depth DeFi knowledge.
+- **Sustainability**: Protocol fees and staking incentives ensure long-term sustainability.
 
-This makes sure that everything is set correctly and our tooling knows which environment you want to use.
+### Example img 
 
-### Running in-memory
+![alt text](image.png)
 
-```zsh
-# starts both UI and sequencer locally
-pnpm env:inmemory dev
 
-# starts UI only
-pnpm env:inmemory dev --filter web
-# starts sequencer only
-pnpm env:inmemory dev --filter chain
-```
+## Getting Started
 
-> Be aware, the dev command will automatically restart your application when your sources change. 
-> If you don't want that, you can alternatively use `pnpm run build` and `pnpm run start`
+1. **Stake Tokens**:  
+   Choose the amount and type of ERC-20 tokens to stake. Select a reward duration (daily, weekly, or monthly) based on your preferences.
 
-Navigate to `localhost:3000` to see the example UI, or to `localhost:8080/graphql` to see the GQL interface of the locally running sequencer.
+2. **Earn Yield**:  
+   Staked tokens are automatically deposited into yield-generating DeFi platforms like Aave or Compound, earning interest over time.
 
-### Running tests
-```zsh
-# run and watch tests for the `chain` package
-pnpm run test --filter=chain -- --watchAll
-```
+3. **Participate in Lottery**:  
+   The interest generated from staked assets is pooled into prize categories (daily, weekly, and monthly). Users automatically participate by staking tokens.
 
-### Running with persistence
+4. **Withdraw at Any Time**:  
+   Users can withdraw their initial deposit anytime, regardless of whether they won rewards.
 
-```zsh
-# start databases
-pnpm env:development docker:up -d
-# generate prisma client
-pnpm env:development prisma:generate
-# migrate database schema
-pnpm env:development prisma:migrate
+## Requirements
 
-# build & start sequencer, make sure to prisma:generate & migrate before
-pnpm build --filter=chain
-pnpm env:development start --filter=chain
+- An ERC-20 compatible wallet
+- Ethereum-based tokens (e.g., USDC, DAI) for staking
+- Internet connection to access the platform
 
-# Watch sequencer for local filesystem changes
-# Be aware: Flags like --prune won't work with 'dev'
-pnpm env:development dev --filter=chain
+## License
 
-# Start the UI
-pnpm env:development dev --filter web
-```
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
-### Deploying to a server
+---
 
-When deploying to a server, you should push your code along with your forked starter-kit to some repository, 
-then clone it on your remote server and execute it.
-
-```zsh
-# start every component with docker
-pnpm env:sovereign docker:up -d
-```
-
-UI will be accessible at `https://localhost` and GQL inspector will be available at `https://localhost/graphql`
-
-#### Configuration
-
-Go to `docker/proxy/Caddyfile` and replace the `*` matcher with your domain.
-```
-yourdomain.com {
-    ...
-}
-```
-
-> HTTPS is handled automatically by Caddy, you can (learn more about automatic https here.)[https://caddyserver.com/docs/automatic-https]
-
-In most cases, you will need to change the `NEXT_PUBLIC_PROTOKIT_GRAPHQL_URL` property in the `.env` file to the domain your graphql endpoint is running in.
-By default, the graphql endpoint is running on the same domain as your UI with the `/graphql` suffix.
-
-#### Running sovereign chain locally
-
-The caddy reverse-proxy automatically uses https for all connections, use this guide to remove certificate errors when accessing localhost sites
-
-<https://caddyserver.com/docs/running#local-https-with-docker>
-
-## CLI Options
-
-- `logLevel`: Overrides the loglevel used. Also configurable via the `PROTOKIT_LOG_LEVEL` environment variable.
-- `pruneOnStartup`: If set, prunes the database before startup, so that your chain is starting from a clean, genesis state. Alias for environment variable `PROTOKIT_PRUNE_ON_STARTUP`
-
-In order to pass in those CLI option, add it at the end of your command like this
-
-`pnpm env:inmemory dev --filter chain -- --logLevel DEBUG --pruneOnStartup`
-
-### Building the framework from source
-
-1. Make sure the framework is located under ../framework from the starter-kit's location
-2. Adapt your starter-kit's package.json to use the file:// references to framework
-3. Go into the framework folder, and build a docker image containing the sources with `docker build -f ./packages/deployment/docker/development-base/Dockerfile -t protokit-base .`
-
-4. Comment out the first line of docker/base/Dockerfile to use protokit-base
+Thank you for using **WinWin-Lottery**! Stake your tokens, earn rewards, and enjoy a no-loss lottery experience.
